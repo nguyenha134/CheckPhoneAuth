@@ -11,6 +11,8 @@ import com.example.phoneauth.databinding.ActivityPhoneBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
 class PhoneActivity : AppCompatActivity() {
@@ -21,12 +23,13 @@ class PhoneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhoneBinding.inflate(layoutInflater)
+        auth = Firebase.auth
         setContentView(binding.root)
 
         binding.sendOTPBtn.setOnClickListener {
             number = binding.phoneEditTextNumber.text.toString()
             if (number.isNotEmpty()) {
-                if (number.length == 10) {
+                if (number.length == 9) {
                     number = "+84$number"
                     binding.phoneProgressBar.visibility = View.VISIBLE
 
